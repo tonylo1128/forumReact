@@ -1,38 +1,43 @@
-import React , {useEffect} from "react";
-import { Card } from "react-bootstrap";
-import * as actions from '../action/actions'
+import React, { useEffect } from "react";
+import { Card, Col, Row, Button } from "react-bootstrap";
+import * as actions from "../action/actions";
 import { connect } from "react-redux";
 
-function ShowDataCard( { categoryList, callApiForCategory } ) {
-
-    useEffect( ()=>{
-        console.log("WTFFFFFFFFFFFF")
-        callApiForCategory();
-    })
-    console.log("又係checkcheck佢既時候啦"+categoryList.Category)
+function ShowDataCard({ categoryList, callApiForCategory,inputValue, inputOption }) {
+  // useEffect(() => {
+  //   callApiForCategory();
+  // }, []);
+  console.log(categoryList);
   return (
     <div>
-      <Card border="danger" style={{ width: "18rem" }}>
-        <Card.Header>{categoryList.Category}</Card.Header>
-        <Card.Body>
-          <Card.Title>Danger Card Title</Card.Title>
-          <Card.Text>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </Card.Text>
-        </Card.Body>
-      </Card>
+      <Row>
+        {categoryList.map((item, index) => (
+          <Col>
+            <Card border="danger" style={{ width: "18rem" }}>
+              <Card.Header>{item.Category}</Card.Header>
+              <Card.Body>
+                <Button variant="primary">Go !</Button>
+              </Card.Body>
+            </Card>
+          </Col>
+        ))}
+      </Row>
+      <h1>借泥做個test之依個係，{inputValue}，另一個係{inputOption}</h1>
     </div>
   );
 }
 
+const mapStateToProps = state => ({
+  categoryList: state.reducer.categoryList,
+  inputValue: state.reducer.inputValue,
+  inputOption: state.reducer.inputOption
+});
 
-const mapStateToProps = state =>({
-    categoryList : state.reducer.categoryList
-})
+const mapsStateToAction = dispatch => ({
+  callApiForCategory: () => dispatch(actions.getCategory())
+});
 
-const mapsStateToAction = dispatch=>({
-    callApiForCategory: ()=> dispatch(actions.getCategory())
-})
-
-export default connect(mapStateToProps,mapsStateToAction)(ShowDataCard);
+export default connect(
+  mapStateToProps,
+  mapsStateToAction
+)(ShowDataCard);

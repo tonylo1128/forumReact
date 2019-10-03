@@ -3,10 +3,10 @@ import * as typeForAction from '../action/type'
 const initstate={
     categoryList: [
     {
-        catId:0,
-        category:"",
-        createAT:"",
-        lastUpdate:""
+        // catId:0,
+        // category:"",
+        // createAT:"",
+        // lastUpdate:""
     }
 ],
     topicList:{
@@ -14,21 +14,44 @@ const initstate={
         topic:"",
         createAT:"",
         lastUpdate:""
-    }
+    },
+
+    createPostTempObj:{
+        title:"",
+        category:""
+    },
+
+    inputValue:"",
+    inputOption:"",
+    apiCallReturnMsg:""
 }
 
 export default function (state=initstate, {type, payload} ){
 
     switch (type){
         case typeForAction.CALL_API_GET_CATEGORY:
-            console.log("Here is reducer and the payload is: "+payload)
+            
             let temp = payload;
-            temp.map((item,index)=> console.log(item))
+            temp.map((item,index)=> console.log("Here is the item and the index is: "+index+"item: "+item))
             return{
                 ...state,  
-                categoryList:{payload}
+                categoryList: payload
             }
-
+        case typeForAction.HANDLE_INPUT:
+            return {
+                ...state,
+                inputValue: payload
+            }
+        case typeForAction.HANDLE_INPUT_OPTION:
+            return {
+                ...state,
+                inputOption: payload
+            }
+        case typeForAction.CALL_API_CREATE_POST:
+            return{
+                ...state,
+                apiCallReturnMsg: payload
+            }
 
         default:
             return state
