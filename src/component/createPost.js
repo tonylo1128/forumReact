@@ -1,110 +1,63 @@
-import React from "react";
-import { Popover, Button, OverlayTrigger, Card } from "react-bootstrap";
+import React, { Component } from "react";
+import { Popover, Button, OverlayTrigger, Card, Form } from "react-bootstrap";
 import { connect } from "react-redux";
 import * as actions from "../action/actions";
 
-function createPost({
-  categoryList,
-  handleInput,
-  inputValue,
-  inputOption,
-  handleInutOption,
-  callApiForCreatePost
-}) {
-  const popover = (
-    <Popover id="popover-basic">
-      <Popover.Title as="h3">Creat a Post</Popover.Title>
-      <Popover.Content>
-        
-
-      
-        <Card.Body>
-          
-          <Card.Text>
-            Post Title
-          </Card.Text>
-          <input
+class CreatePost extends Component {
+  render() {
+    const {
+      categoryList,
+      handleInput,
+      inputValue,
+      inputOption,
+      handleInutOption,
+      callApiForCreatePost
+    } = this.props;
+    const popover = (
+      <Popover id="popover-basic">
+        <Popover.Title as="h3">Creat a Post</Popover.Title>
+        <Popover.Content>
+          <Form.Group>
+            <Form.Label>Post Title</Form.Label>
+            <Form.Control
               type="text"
               onChange={event => handleInput(event.target.value)}
               value={inputValue}
             />
+          </Form.Group>
 
-          <Card.Text>
-          Belong Categories 
-          </Card.Text>
-          <select
+          <Form.Group>
+            <Form.Label>Belong Categories </Form.Label>
+            <Form.Control
               onChange={event => handleInutOption(event.target.value)}
               as="select"
             >
               {categoryList.map((item, index) => (
                 <option>{item.Category}</option>
               ))}
-            </select>
-          
+            </Form.Control>
+          </Form.Group>
 
-          <Button
-            onClick={() => callApiForCreatePost(inputValue, inputOption)}
-            variant="primary"
-            type="submit"
-          >
-            Submit
-          </Button>
-         
-        </Card.Body>
-      
-
-
-
-
-          
-            {/* <h1>Post Title</h1>
-            <input
-              type="text"
-              onChange={event => handleInput(event.target.value)}
-              value={inputValue}
-            />
-         
-
-          
-            <h1>Belong Categories </h1>
-            <select
-              onChange={event => handleInutOption(event.target.value)}
-              as="select"
+          <Form.Group>
+            <Button
+              onClick={() => callApiForCreatePost(inputValue, inputOption)}
+              variant="primary"
+              type="submit"
             >
-              {categoryList.map((item, index) => (
-                <option>{item.Category}</option>
-              ))}
-            </select>
-          
-
-          <Button
-            onClick={() => callApiForCreatePost(inputValue, inputOption)}
-            variant="primary"
-            type="submit"
-          >
-            Submit
-          </Button> */}
-        
-
-
-
-      </Popover.Content>
-    </Popover>
-  );
-
-  const Example = () => (
-    <OverlayTrigger trigger="click" placement="left" overlay={popover}>
-      <Button className="float-right" variant="success">
-        Click me to see
-      </Button>
-    </OverlayTrigger>
-  );
-
-  return (
-    <div>
-      <Example />
-    </div>
-  );
+              Submit
+            </Button>
+          </Form.Group>
+        </Popover.Content>
+      </Popover>
+    );
+    return (
+      <OverlayTrigger trigger="click" placement="left" overlay={popover}>
+        <Button className="float-right" variant="success">
+          Create Post Here!
+        </Button>
+      </OverlayTrigger>
+    );
+  }
 }
 
 const mapStateToProps = state => ({
@@ -124,4 +77,4 @@ const mapsStateToAction = dispatch => ({
 export default connect(
   mapStateToProps,
   mapsStateToAction
-)(createPost);
+)(CreatePost);

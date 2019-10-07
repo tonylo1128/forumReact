@@ -9,12 +9,9 @@ const initstate={
         // lastUpdate:""
     }
 ],
-    topicList:{
-        topicId:0,
-        topic:"",
-        createAT:"",
-        lastUpdate:""
-    },
+    topicList:[{
+
+    }],
 
     createPostTempObj:{
         title:"",
@@ -23,7 +20,8 @@ const initstate={
 
     inputValue:"",
     inputOption:"",
-    apiCallReturnMsg:""
+    apiCallReturnMsg:"",
+    returnMsg:""
 }
 
 export default function (state=initstate, {type, payload} ){
@@ -51,6 +49,16 @@ export default function (state=initstate, {type, payload} ){
             return{
                 ...state,
                 apiCallReturnMsg: payload
+            }
+        case typeForAction.CALL_API_GET_POST:
+            return{
+                ...state,
+                topicList: payload
+            }
+        case typeForAction.CALL_API_DELE_POST:
+            return{
+                ...state,
+                returnMsg:payload
             }
 
         default:
