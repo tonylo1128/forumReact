@@ -14,7 +14,7 @@ function NavbarCom({ categoryList, callApiForCategory }) {
   //   callApiForCategory();
   // }, []);
   return (
-    <Navbar bg="dark" variant="dark" expand="lg">
+    <Navbar bg="" variant="dark" expand="lg">
       <Navbar.Brand href="#home">
         <img
           alt=""

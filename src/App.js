@@ -13,7 +13,7 @@ function App({ callApiForCategory, callApiForGetPost, returnMsg }) {
   }, []);
   return (
     // <div className="App" style={{ backgroundColor: "#000000" }}>
-    <div className="App">
+    <div className="App" className="bg-dark">
       <Container>
         <Row>
           <Col>
@@ -24,7 +24,7 @@ function App({ callApiForCategory, callApiForGetPost, returnMsg }) {
         <ShowDataCard />
         
       </Container>
-
+      
       
       {/* <Table responsive>
           <tbody>

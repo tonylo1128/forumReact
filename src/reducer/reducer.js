@@ -19,9 +19,13 @@ const initstate={
     },
 
     inputValue:"",
-    inputOption:"",
+    inputOption:1,
     apiCallReturnMsg:"",
-    returnMsg:""
+    returnMsg:"",
+    img:[{
+        
+    }],
+    fileObj : new FormData()
 }
 
 export default function (state=initstate, {type, payload} ){
@@ -60,7 +64,11 @@ export default function (state=initstate, {type, payload} ){
                 ...state,
                 returnMsg:payload
             }
-
+        case typeForAction.HANDLE_FILE_INPUT:
+            return{
+                ...state,
+                img:payload
+            }
         default:
             return state
     }

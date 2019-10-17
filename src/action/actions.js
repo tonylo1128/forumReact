@@ -1,9 +1,10 @@
 import axios from "axios";
 import * as type from "./type";
+import { async } from "q";
 
 export function getCategory() {
   return dispatch => {
-    return axios.get("http://localhost:8004/").then(response => {
+    return axios.get("http://localhost:8005/").then(response => {
       dispatch(callBackForGetCategory(response.data.categories));
     });
   };
@@ -30,30 +31,12 @@ export function handleInutOption(inputTemp) {
   };
 }
 
-export function callApiForCreatePost(input1, input2) {
-  const reactGetInputValue = { input1, input2 };
-  // const reactGetInputValue="Captain America"
-  console.log("屌on99999999" + input1 + "2......" + input2);
-  return dispatch => {
-    return axios
-      .post("http://localhost:8004/postTopic", { reactGetInputValue })
-      .then(response => {
-        dispatch(createPost());
-      });
-  };
-}
 
-export function createPost(returnMsg) {
-  return {
-    type: type.CALL_API_CREATE_POST,
-    payload: returnMsg
-  };
-}
 
 
 export function callApiForGetPost(){
   return dispatch => { 
-    return axios.get("http://localhost:8004/getTopic").then( (response)=>{
+    return axios.get("http://localhost:8005/getTopic").then( (response)=>{
     dispatch(getPost(response.data.post))
   })}
   
@@ -71,7 +54,7 @@ export function callApiDelePost(inputTemp){
   let valuePassToReact = inputTemp;
   return dispatch => {
     return axios
-    .delete("http://localhost:8004/dele/"+valuePassToReact)
+    .delete("http://localhost:8005/dele/"+valuePassToReact)
     .then((response)=>{
       dispatch(callBackForDelePost(response.data))
     })
@@ -87,7 +70,14 @@ export function callBackForDelePost(result){
 
 export function delePostAndUpdate(inputTemp){
   return dispatch => {
-    dispatch( callApiDelePost(inputTemp) ).then( dispatch( getCategory() ) )
+    dispatch( callApiDelePost(inputTemp) ).then( () => dispatch( getCategory() ) )
+  }
+}
+
+export function handleFileInput(inputTemp){
+  return {
+    type: type.HANDLE_FILE_INPUT,
+    payload: inputTemp
   }
 }
 
@@ -98,4 +88,51 @@ export function delePostAndUpdate(inputTemp){
 // }
 
 
+// Upload File Function
+// export function callApiForFilUpload(input){
+//   console.log("LETMESEEEEEEEEEEEEEEEEEEEEEEEEEEEE")
+//    return dispatch =>{
+//      return axios.post(("http://localhost:8005/fileUpload"),  input, {
+//        headers:{
+//          'Content-Type': 'multipart/form-data'
+//        }
+//      })
+//    }
+// }
 
+export async function callApiForCreatePost(input1, input2, input3) {
+  
+  
+  const reactGetInputValue = { input1, input2 };
+  const fileObj = new FormData();
+  fileObj.append('file', input3);
+  console.log("屌on99999999" + input1 + "2......" + input2+ "3......"+input3);
+  
+  const config = {
+    headers: {
+        'content-type': 'multipart/form-data'
+    }
+};
+
+// const config = {
+//   headers: {
+//       'content-type': false,
+//       'process-data': false
+//   }
+// };
+  
+  return dispatch => {
+    return axios
+      .post("http://localhost:8005/postTopic", { fileObj }, config)
+      .then(response => {
+        dispatch(createPost())
+      });
+  };
+}
+
+export function createPost(returnMsg) {
+  return {
+    type: type.CALL_API_CREATE_POST,
+    payload: returnMsg
+  };
+}

@@ -11,8 +11,15 @@ class CreatePost extends Component {
       inputValue,
       inputOption,
       handleInutOption,
-      callApiForCreatePost
+      callApiForCreatePost,
+      handleFileInput,
+      img
     } = this.props;
+
+    // const fileObj = new FormData();
+    // fileObj.append('file', img);
+
+
     const popover = (
       <Popover id="popover-basic">
         <Popover.Title as="h3">Creat a Post</Popover.Title>
@@ -39,8 +46,16 @@ class CreatePost extends Component {
           </Form.Group>
 
           <Form.Group>
+            <Form.Label>Upload Your Image Here </Form.Label>
+            <input type="file" onChange={(event)=>handleFileInput(event.target.files[0])}/>
+            {console.log(img)}
+            {console.log(img.name)}
+          </Form.Group>
+
+          <Form.Group>
+
             <Button
-              onClick={() => callApiForCreatePost(inputValue, inputOption)}
+              onClick={() => callApiForCreatePost(inputValue, inputOption, img)}
               variant="primary"
               type="submit"
             >
@@ -63,15 +78,16 @@ class CreatePost extends Component {
 const mapStateToProps = state => ({
   categoryList: state.reducer.categoryList,
   inputValue: state.reducer.inputValue,
-  inputOption: state.reducer.inputOption
+  inputOption: state.reducer.inputOption,
+  img: state.reducer.img
 });
 
 const mapsStateToAction = dispatch => ({
   callApiForCategory: () => dispatch(actions.getCategory()),
   handleInput: input => dispatch(actions.handleInput(input)),
   handleInutOption: input => dispatch(actions.handleInutOption(input)),
-  callApiForCreatePost: (input1, input2) =>
-    dispatch(actions.callApiForCreatePost(input1, input2))
+  callApiForCreatePost: (input1, input2, input3) => dispatch(actions.callApiForCreatePost(input1, input2, input3)),
+  handleFileInput: input => dispatch( actions.handleFileInput(input) )
 });
 
 export default connect(
