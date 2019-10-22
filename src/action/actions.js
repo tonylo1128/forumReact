@@ -100,30 +100,20 @@ export function handleFileInput(inputTemp){
 //    }
 // }
 
-export async function callApiForCreatePost(input1, input2, input3) {
+export function callApiForCreatePost(input1, input2, input3) {
   
   
   const reactGetInputValue = { input1, input2 };
   const fileObj = new FormData();
-  fileObj.append('file', input3);
-  console.log("屌on99999999" + input1 + "2......" + input2+ "3......"+input3);
-  
-  const config = {
-    headers: {
-        'content-type': 'multipart/form-data'
-    }
-};
+  fileObj.append('img', input3);
+  fileObj.append('topic', input1);
+  fileObj.append('catID', input2);
+  console.log("屌on99999999: " + input1 + "2......: " + input2+ "3......: "+input3);
 
-// const config = {
-//   headers: {
-//       'content-type': false,
-//       'process-data': false
-//   }
-// };
   
   return dispatch => {
     return axios
-      .post("http://localhost:8005/postTopic", { fileObj }, config)
+      .post("http://localhost:8005/postTopic",  fileObj )
       .then(response => {
         dispatch(createPost())
       });

@@ -15,7 +15,9 @@ function ShowDataCard({
   // useEffect(() => {
   //   callApiForCategory();
   // }, []);
-  console.log(categoryList);
+  
+  // console.log(categoryList);
+  
   return (
     <Row>
       {topicList.map((item, index) => (
@@ -41,8 +43,9 @@ function ShowDataCard({
           </div>
         </Col>
       ))}
-
+      {console.log("-------------------------")}
       {console.log(topicList)}
+      {console.log("-------------------------")}
     </Row>
   );
 }
