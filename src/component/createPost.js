@@ -12,6 +12,7 @@ class CreatePost extends Component {
       inputOption,
       handleInutOption,
       callApiForCreatePost,
+      combineCreateAndUpdateFun,
       handleFileInput,
       img
     } = this.props;
@@ -55,7 +56,7 @@ class CreatePost extends Component {
           <Form.Group>
 
             <Button
-              onClick={() => callApiForCreatePost(inputValue, inputOption, img)}
+              onClick={() => combineCreateAndUpdateFun(inputValue, inputOption, img)}
               variant="primary"
               type="submit"
             >
@@ -87,7 +88,8 @@ const mapsStateToAction = dispatch => ({
   handleInput: input => dispatch(actions.handleInput(input)),
   handleInutOption: input => dispatch(actions.handleInutOption(input)),
   callApiForCreatePost: (input1, input2, input3) => dispatch(actions.callApiForCreatePost(input1, input2, input3)),
-  handleFileInput: input => dispatch( actions.handleFileInput(input) )
+  handleFileInput: input => dispatch( actions.handleFileInput(input) ),
+  combineCreateAndUpdateFun: (input1, input2, input3) =>  dispatch( actions.combineCreateAndUpdateFun(input1, input2, input3) )
 });
 
 export default connect(

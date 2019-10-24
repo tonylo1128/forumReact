@@ -81,35 +81,14 @@ export function handleFileInput(inputTemp){
   }
 }
 
-// export function combine_FinishEdit_CallApiForData(item, temp){
-//   return dispatch=>{
-//       dispatch(callApiForEdit(item, temp)).then( dispatch(callApi() ) )
-//   }
-// }
 
-
-// Upload File Function
-// export function callApiForFilUpload(input){
-//   console.log("LETMESEEEEEEEEEEEEEEEEEEEEEEEEEEEE")
-//    return dispatch =>{
-//      return axios.post(("http://localhost:8005/fileUpload"),  input, {
-//        headers:{
-//          'Content-Type': 'multipart/form-data'
-//        }
-//      })
-//    }
-// }
 
 export function callApiForCreatePost(input1, input2, input3) {
   
-  
-  const reactGetInputValue = { input1, input2 };
   const fileObj = new FormData();
   fileObj.append('img', input3);
   fileObj.append('topic', input1);
   fileObj.append('catID', input2);
-  console.log("屌on99999999: " + input1 + "2......: " + input2+ "3......: "+input3);
-
   
   return dispatch => {
     return axios
@@ -125,4 +104,10 @@ export function createPost(returnMsg) {
     type: type.CALL_API_CREATE_POST,
     payload: returnMsg
   };
+}
+
+export function combineCreateAndUpdateFun(input1,input2,input3){
+  return dispatch =>{
+    dispatch( callApiForCreatePost(input1,input2,input3) ).then( dispatch( getCategory() ) )
+  }
 }
