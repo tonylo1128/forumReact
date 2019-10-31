@@ -19,13 +19,16 @@ const initstate={
     },
 
     inputValue:"",
-    inputOption:1,
+    inputOption:'1',
     apiCallReturnMsg:"",
     returnMsg:"",
     img:[{
         
     }],
-    fileObj : new FormData()
+    fileObj : new FormData(),
+    handlePostContent:[{
+
+    }]
 }
 
 export default function (state=initstate, {type, payload} ){
@@ -68,6 +71,11 @@ export default function (state=initstate, {type, payload} ){
             return{
                 ...state,
                 img:payload
+            }
+        case typeForAction.HANDLE_POST_CONTENT:
+            return{
+                ...state,
+                handlePostContent: payload
             }
         default:
             return state

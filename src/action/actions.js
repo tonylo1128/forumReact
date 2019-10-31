@@ -1,6 +1,5 @@
 import axios from "axios";
 import * as type from "./type";
-import { async } from "q";
 
 export function getCategory() {
   return dispatch => {
@@ -25,6 +24,9 @@ export function handleInput(inputTemp) {
 }
 
 export function handleInutOption(inputTemp) {
+  // console.log("-------------------------------------");
+  // console.log(inputTemp);
+  // console.log("-------------------------------------");
   return {
     type: type.HANDLE_INPUT_OPTION,
     payload: inputTemp
@@ -37,6 +39,7 @@ export function handleInutOption(inputTemp) {
 export function callApiForGetPost(){
   return dispatch => { 
     return axios.get("http://localhost:8005/getTopic").then( (response)=>{
+      console.log(response.data.test)
     dispatch(getPost(response.data.post))
   })}
   
@@ -109,5 +112,12 @@ export function createPost(returnMsg) {
 export function combineCreateAndUpdateFun(input1,input2,input3){
   return dispatch =>{
     dispatch( callApiForCreatePost(input1,input2,input3) ).then( dispatch( getCategory() ) )
+  }
+}
+
+export function handlePostContent (item){
+  return{
+    type:type.HANDLE_POST_CONTENT,
+    payload: item
   }
 }

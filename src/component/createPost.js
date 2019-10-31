@@ -49,8 +49,8 @@ class CreatePost extends Component {
           <Form.Group>
             <Form.Label>Upload Your Image Here </Form.Label>
             <input type="file" onChange={(event)=>handleFileInput(event.target.files[0])}/>
-            {console.log(img)}
-            {console.log(img.name)}
+            {/* {img!=null ? console.log(img):"This is createPost and nth on img"}
+            {img!=null ? console.log(img.name):"This is createPost and nth on img's name"} */}
           </Form.Group>
 
           <Form.Group>

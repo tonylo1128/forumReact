@@ -1,19 +1,31 @@
 import React, { useEffect } from "react";
 import "./App.css";
 import { Container, Row, Col, Table } from "react-bootstrap";
-import NavbarCom from "./component/NavbarCom";
-import ShowDataCard from "./component/ShowDataCard";
 import * as actions from "./action/actions";
 import { connect } from "react-redux";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-function App({ callApiForCategory, callApiForGetPost, returnMsg }) {
+import NavbarCom from "./component/NavbarCom";
+import ShowDataCard from "./component/ShowDataCard";
+import Contentofpost from "./component/contentofpost";
+import HomeComponent from "./component/HomeComponent";
+
+function App({
+  callApiForCategory,
+  callApiForGetPost,
+  returnMsg,
+  handlePostContent
+}) {
   useEffect(() => {
     callApiForCategory();
     callApiForGetPost();
   }, []);
+
   return (
     // <div className="App" style={{ backgroundColor: "#000000" }}>
-    <div className="App" className="bg-dark">
+
+    <div className="bg-dark">
+   
       <Container>
         <Row>
           <Col>
@@ -21,24 +33,33 @@ function App({ callApiForCategory, callApiForGetPost, returnMsg }) {
           </Col>
         </Row>
 
-        <ShowDataCard />
-        
-      </Container>
-      
-      
-      {/* <Table responsive>
-          <tbody>
-            <tr>
+        <Row>
+          <Col sm={4}>
+            <div class="scrollY" style={{ overflowY: "scroll" }}>
               <ShowDataCard />
-            </tr>
-          </tbody>
-        </Table> */}
+            </div>
+          </Col>
+
+          <Col sm={8}>
+            <div class="scrollY" style={{ overflowY: "scroll" }}>
+              <BrowserRouter>
+                
+                    <Route exact path="/" component={HomeComponent}/>
+                    <Route path="/post" component={Contentofpost } />
+                    <Route path="/SC" component={ShowDataCard } />
+                
+              </BrowserRouter>
+            </div>
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 }
 
 const mapStateToProps = state => ({
   returnMsg: state.reducer.returnMsg,
+  handlePostContent: state.reducer.handlePostContent
 });
 
 const mapsStateToAction = dispatch => ({
@@ -50,3 +71,5 @@ export default connect(
   mapStateToProps,
   mapsStateToAction
 )(App);
+
+
