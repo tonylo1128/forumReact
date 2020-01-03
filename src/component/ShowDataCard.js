@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Card, Col, Row, Button, tbody, Image } from "react-bootstrap";
 import * as actions from "../action/actions";
 import { connect } from "react-redux";
-import { BrowserRouter, Route, Switch, NavLink, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function ShowDataCard({
   categoryList,
@@ -16,8 +16,10 @@ function ShowDataCard({
 }) {
   return (
     
+    
     <Row>
       {topicList.map((item, index) => (
+        
         <Col>
           <div className="m-3">
             <Card
@@ -25,13 +27,17 @@ function ShowDataCard({
               border="primary"
               style={{ width: "18rem" }}
             >
-              {item.img !== null ? (
+            
+              {item.img !== null ?
+              (
+                
                 <Card.Img
                   variant="top"
                   src={item.img}
                   className="mw-100"
                   fluid
                 />
+                
               ) : null}
 
               <Card.Body>
@@ -62,7 +68,10 @@ function ShowDataCard({
                           onClick={() => handlePostContent(item)}
                           variant="primary"
                         >
-                         Go!
+                          <Link to='/post'>
+                             Go!
+                         </Link>
+                         
                         </Button>
                     
 

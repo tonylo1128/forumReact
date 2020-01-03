@@ -3,7 +3,7 @@ import "./App.css";
 import { Container, Row, Col, Table } from "react-bootstrap";
 import * as actions from "./action/actions";
 import { connect } from "react-redux";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import NavbarCom from "./component/NavbarCom";
 import ShowDataCard from "./component/ShowDataCard";
@@ -22,8 +22,7 @@ function App({
   }, []);
 
   return (
-    // <div className="App" style={{ backgroundColor: "#000000" }}>
-
+    <Router>
     <div className="bg-dark">
    
       <Container>
@@ -42,18 +41,22 @@ function App({
 
           <Col sm={8}>
             <div class="scrollY" style={{ overflowY: "scroll" }}>
-              <BrowserRouter>
-                
+
+    
+                <Switch>
                     <Route exact path="/" component={HomeComponent}/>
                     <Route path="/post" component={Contentofpost } />
-                    <Route path="/SC" component={ShowDataCard } />
+                    <Route path="/sc" component={ShowDataCard} />
+                </Switch>
                 
-              </BrowserRouter>
+             
+
             </div>
           </Col>
         </Row>
       </Container>
     </div>
+    </Router>
   );
 }
 

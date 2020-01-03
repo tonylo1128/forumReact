@@ -4,6 +4,7 @@ import * as actions from "../action/actions";
 import { connect } from "react-redux";
 
 function contentofpost({ handlePostContent }) {
+  
   console.log(handlePostContent);
   return (
     <Card className="bg-dark">

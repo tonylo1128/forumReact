@@ -1,15 +1,11 @@
 import React, { useEffect } from "react";
-import { NavDropdown, Navbar, Nav, Button } from "react-bootstrap";
+import { NavDropdown, Navbar, Nav } from "react-bootstrap";
 import capLogo from "../capLogo.png";
 import * as actions from "../action/actions";
 import { connect } from "react-redux";
 import Example from "../component/createPost";
-import { Link, Router, Route, BrowserRouter} from "react-router-dom";
+import {Link} from "react-router-dom"
 
-
-import ShowDataCard from "./ShowDataCard";
-import Contentofpost from "./contentofpost";
-import HomeComponent from "./HomeComponent";
 
 
 function NavbarCom({ categoryList, callApiForCategory }) {
@@ -21,7 +17,6 @@ function NavbarCom({ categoryList, callApiForCategory }) {
   //   callApiForCategory();
   // }, []);
   return (
-    <BrowserRouter>
     <Navbar bg="" variant="dark" expand="lg">
       <Navbar.Brand href="#home">
         <img
@@ -31,7 +26,9 @@ function NavbarCom({ categoryList, callApiForCategory }) {
           height="30"
           className="d-inline-block align-top"
         />
-        {"Tony's Forum"}
+        <Link to='/'>
+          {"Tony's Forum"}
+        </Link>
       </Navbar.Brand>
 
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -40,12 +37,12 @@ function NavbarCom({ categoryList, callApiForCategory }) {
         <Nav.Link href="/SC">Home</Nav.Link>
         <Nav.Link href="/post">Post</Nav.Link>
 
-      {/* <Router> */}
-      <Link to="/SC">Home(Testing)</Link> 
+  
+      
+        <Nav.Link> <Link to='/sc'> Home(Testing) </Link> </Nav.Link>
       <Nav.Link> <Link to="/post">Post(Testing)</Link> </Nav.Link>
-        
-      {/* </Router> */}
-        
+
+           
        
 
         <NavDropdown title="Category" id="basic-nav-dropdown">
@@ -61,7 +58,7 @@ function NavbarCom({ categoryList, callApiForCategory }) {
         <Example />
       </div>
     </Navbar>
-    </BrowserRouter>
+
     
   );
 }
